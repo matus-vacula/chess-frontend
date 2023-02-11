@@ -14,7 +14,7 @@
       .square {
         width: 80px;
         height: 80px;
-        background-color: #e8ce62;
+        background-color: #c9ccb0;
         border: 0px solid black;
         display: flex;
         align-items: center;
@@ -22,7 +22,7 @@
         box-sizing: border-box;
       }
       .black {
-        background-color: #31650a;
+        background-color: #779952;
       }
       .large-icon {
         font-size: 32px;
@@ -82,40 +82,45 @@
       }
     </style>
     <script>
-      const pieces = [
-        { id: 'a1', type: 'rook', position: 'a1', player: 'white' },
-        { id: 'b1', type: 'knight', position: 'b1', player: 'white'  },
-        { id: 'c1', type: 'bishop', position: 'c1', player: 'white' },
-        { id: 'd1', type: 'queen', position: 'd1', player: 'white' },
-        { id: 'e1', type: 'king', position: 'e1', player: 'white' },
-        { id: 'f1', type: 'bishop', position: 'f1', player: 'white' },
-        { id: 'g1', type: 'knight', position: 'g1', player: 'white' },
-        { id: 'h1', type: 'rook', position: 'h1', player: 'white' },
-        { id: 'a2', type: 'pawn', position: 'a2', player: 'white' },
-        { id: 'b2', type: 'pawn', position: 'b2', player: 'white' },
-        { id: 'c2', type: 'pawn', position: 'c2', player: 'white' },
-        { id: 'd2', type: 'pawn', position: 'd2', player: 'white' },
-        { id: 'e2', type: 'pawn', position: 'e2', player: 'white' },
-        { id: 'f2', type: 'pawn', position: 'f2', player: 'white' },
-        { id: 'g2', type: 'pawn', position: 'g2', player: 'white' },
-        { id: 'h2', type: 'pawn', position: 'h2', player: 'white' },
-        { id: 'a8', type: 'rook', position: 'a8', player: 'black' },
-        { id: 'b8', type: 'knight', position: 'b8', player: 'black' },
-        { id: 'c8', type: 'bishop', position: 'c8', player: 'black' },
-        { id: 'd8', type: 'queen', position: 'd8', player: 'black' },
-        { id: 'e8', type: 'king', position: 'e8', player: 'black' },
-        { id: 'f8', type: 'bishop', position: 'f8', player: 'black' },
-        { id: 'g8', type: 'knight', position: 'g8', player: 'black' },
-        { id: 'h8', type: 'rook', position: 'h8', player: 'black' },
-        { id: 'a7', type: 'pawn', position: 'a7', player: 'black' },
-        { id: 'b7', type: 'pawn', position: 'b7', player: 'black' },
-        { id: 'c7', type: 'pawn', position: 'c7', player: 'black' },
-        { id: 'd7', type: 'pawn', position: 'd7', player: 'black' },
-        { id: 'e7', type: 'pawn', position: 'e7', player: 'black' },
-        { id: 'f7', type: 'pawn', position: 'f7', player: 'black' },
-        { id: 'g7', type: 'pawn', position: 'g7', player: 'black' },
-        { id: 'h7', type: 'pawn', position: 'h7', player: 'black' },
-      ];
+
+      function startingPieces() {
+        return [
+          { id: 'a1', type: 'rook', position: 'a1', player: 'white', taken: false },
+          { id: 'b1', type: 'knight', position: 'b1', player: 'white', taken: false  },
+          { id: 'c1', type: 'bishop', position: 'c1', player: 'white', taken: false },
+          { id: 'd1', type: 'queen', position: 'd1', player: 'white', taken: false },
+          { id: 'e1', type: 'king', position: 'e1', player: 'white', taken: false },
+          { id: 'f1', type: 'bishop', position: 'f1', player: 'white', taken: false },
+          { id: 'g1', type: 'knight', position: 'g1', player: 'white', taken: false },
+          { id: 'h1', type: 'rook', position: 'h1', player: 'white', taken: false },
+          { id: 'a2', type: 'pawn', position: 'a2', player: 'white', taken: false },
+          { id: 'b2', type: 'pawn', position: 'b2', player: 'white', taken: false },
+          { id: 'c2', type: 'pawn', position: 'c2', player: 'white', taken: false },
+          { id: 'd2', type: 'pawn', position: 'd2', player: 'white', taken: false },
+          { id: 'e2', type: 'pawn', position: 'e2', player: 'white', taken: false },
+          { id: 'f2', type: 'pawn', position: 'f2', player: 'white', taken: false },
+          { id: 'g2', type: 'pawn', position: 'g2', player: 'white', taken: false },
+          { id: 'h2', type: 'pawn', position: 'h2', player: 'white', taken: false },
+          { id: 'a8', type: 'rook', position: 'a8', player: 'black', taken: false },
+          { id: 'b8', type: 'knight', position: 'b8', player: 'black', taken: false },
+          { id: 'c8', type: 'bishop', position: 'c8', player: 'black', taken: false },
+          { id: 'd8', type: 'queen', position: 'd8', player: 'black', taken: false },
+          { id: 'e8', type: 'king', position: 'e8', player: 'black', taken: false },
+          { id: 'f8', type: 'bishop', position: 'f8', player: 'black', taken: false },
+          { id: 'g8', type: 'knight', position: 'g8', player: 'black', taken: false },
+          { id: 'h8', type: 'rook', position: 'h8', player: 'black', taken: false },
+          { id: 'a7', type: 'pawn', position: 'a7', player: 'black', taken: false },
+          { id: 'b7', type: 'pawn', position: 'b7', player: 'black', taken: false },
+          { id: 'c7', type: 'pawn', position: 'c7', player: 'black', taken: false },
+          { id: 'd7', type: 'pawn', position: 'd7', player: 'black', taken: false },
+          { id: 'e7', type: 'pawn', position: 'e7', player: 'black', taken: false },
+          { id: 'f7', type: 'pawn', position: 'f7', player: 'black', taken: false },
+          { id: 'g7', type: 'pawn', position: 'g7', player: 'black', taken: false },
+          { id: 'h7', type: 'pawn', position: 'h7', player: 'black', taken: false },
+        ];
+      }
+
+      const pieces = startingPieces();
 
       const squares = [
         { id: 'a1', color: 'black' },
@@ -184,13 +189,17 @@
         { id: 'h8', color: 'black' },
       ];
 
-      function placePieces(pieces) {
-        const chessboard = document.querySelector('.chessboard');
+      function placePieces() {
+        squares.forEach(square => {
+          const squareElement = document.getElementById(square.id);
+          const piece = getPieceByPosition(square.id);
 
-        pieces.forEach(piece => {
-          const square = document.getElementById(piece.position);
-          const colorClass = piece.player + "-piece";
-          square.innerHTML = `<i class="fas fa-chess-${piece.type} large-icon ${colorClass}"></i>`;
+          if (piece) {
+            const colorClass = piece.player + "-piece";
+            squareElement.innerHTML = `<i class="fas fa-chess-${piece.type} large-icon ${colorClass}"></i>`;
+          } else {
+            squareElement.innerHTML = '';
+          }
         });
       }
 
@@ -240,18 +249,104 @@
         });
       }
 
-      const blackPlacement = { squaresAscending: true, rowsAscending: true, columnsAscending: false }
-      const whitePlacement = { squaresAscending: false, rowsAscending: false, columnsAscending: true }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const placement = blackPlacement;
-
+      function renderChessBoard(placement) {
         const sortedSquares = sortSquares(squares, placement.squaresAscending);
         placeSquares(sortedSquares);
 
         generateLabels('row-labels', 'rows', placement.rowsAscending);
         generateLabels('column-labels', 'columns', placement.columnsAscending);
-        placePieces(pieces);
+        placePieces();
+      }
+
+      const blackPlacement = { squaresAscending: true, rowsAscending: true, columnsAscending: false }
+      const whitePlacement = { squaresAscending: false, rowsAscending: false, columnsAscending: true }
+
+      const gameState = {
+        moveMode: false,
+        selected: null,
+        turn: 'white'
+      };
+
+      function canReach(from, to, type) {
+        return true;
+      }
+
+      function willExposeKing(from, to) {
+        return false;
+      }
+
+      function endTurn() {
+        if (gameState.turn === 'white') {
+          gameState.turn = 'black';
+        } else {
+          gameState.turn = 'white';
+        }
+      }
+
+      function getPieceByPosition(position) {
+        let foundPiece = null;
+
+        pieces.forEach(piece => {
+          if(!piece.taken && piece.position === position) {
+            foundPiece = piece;
+          }
+        });
+
+        return foundPiece;
+      }
+
+      function movePiece(from, to) {
+        const fromPiece = getPieceByPosition(from);
+        const toPiece = getPieceByPosition(to);
+
+        if (!fromPiece)
+          throw new Error('No piece in selected square');
+        if (fromPiece.player !== gameState.turn)
+          throw new Error(`It\'s not ${fromPiece.player}\'s turn`);
+        if (!canReach(from, to, fromPiece.type))
+          throw new Error('Piece cannot reach');
+        if (willExposeKing(from, to))
+          throw new Error('Move will expose your King');
+
+        fromPiece.position = to;
+        if (toPiece) {
+          toPiece.taken = true;
+        }
+
+        endTurn();
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        renderChessBoard(whitePlacement);
+      });
+
+      document.addEventListener('click', event => {
+        const target = event.target.closest('.square');
+
+        if (target) {
+          const id = target.id;
+
+          if (!gameState.moveMode) {
+            const piece = getPieceByPosition(id);
+            
+            if (piece) {
+              gameState.selected = piece.position;
+              gameState.moveMode = true;
+            }
+          } else if (gameState.moveMode && gameState.selected) {
+            try {
+              movePiece(gameState.selected, id);
+            } catch (e) {
+              alert(e.message);
+            }
+            gameState.moveMode = false;
+            gameState.selected = null;
+          }
+
+          placePieces();
+          console.log({gameState: gameState});
+        }
+
       });
     </script>
   </head>
