@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <style>
+      .chessboard {
+        display: flex;
+        flex-wrap: wrap;
+        width: 640px;
+        height: 640px;
+        padding: 0;
+        margin: 0;
+      }
+      .square {
+        width: 80px;
+        height: 80px;
+        background-color: #e8ce62;
+        border: 0px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+      .black {
+        background-color: #31650a;
+      }
+      .large-icon {
+        font-size: 32px;
+      }
+      .white-piece {
+        color: white;
+      }
+      .black-piece {
+        color: black;
+      }
+      .labels {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 640px;
+        font-size: 20px;
+        color: white;
+      }
+      .labels.left {
+        text-align: center;
+        align-items: center;
+      }
+      .labels.bottom {
+        flex-direction: row;
+        height: 80px;
+        width: 640px;
+        padding-left: 80px;
+        text-align: center;
+        justify-content: center;
+      }
+      .label {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        width: 80px;
+      }
+      body {
+        background-color: #414040FF;
+
+      }
+      .container {
+        display: flex;
+      }
+
+      .horizontal-container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .vertical-container {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <script>
+      const pieces = [
+        { id: 'a1', type: 'rook', position: 'a1', player: 'white' },
+        { id: 'b1', type: 'knight', position: 'b1', player: 'white'  },
+        { id: 'c1', type: 'bishop', position: 'c1', player: 'white' },
+        { id: 'd1', type: 'queen', position: 'd1', player: 'white' },
+        { id: 'e1', type: 'king', position: 'e1', player: 'white' },
+        { id: 'f1', type: 'bishop', position: 'f1', player: 'white' },
+        { id: 'g1', type: 'knight', position: 'g1', player: 'white' },
+        { id: 'h1', type: 'rook', position: 'h1', player: 'white' },
+        { id: 'a2', type: 'pawn', position: 'a2', player: 'white' },
+        { id: 'b2', type: 'pawn', position: 'b2', player: 'white' },
+        { id: 'c2', type: 'pawn', position: 'c2', player: 'white' },
+        { id: 'd2', type: 'pawn', position: 'd2', player: 'white' },
+        { id: 'e2', type: 'pawn', position: 'e2', player: 'white' },
+        { id: 'f2', type: 'pawn', position: 'f2', player: 'white' },
+        { id: 'g2', type: 'pawn', position: 'g2', player: 'white' },
+        { id: 'h2', type: 'pawn', position: 'h2', player: 'white' },
+        { id: 'a8', type: 'rook', position: 'a8', player: 'black' },
+        { id: 'b8', type: 'knight', position: 'b8', player: 'black' },
+        { id: 'c8', type: 'bishop', position: 'c8', player: 'black' },
+        { id: 'd8', type: 'queen', position: 'd8', player: 'black' },
+        { id: 'e8', type: 'king', position: 'e8', player: 'black' },
+        { id: 'f8', type: 'bishop', position: 'f8', player: 'black' },
+        { id: 'g8', type: 'knight', position: 'g8', player: 'black' },
+        { id: 'h8', type: 'rook', position: 'h8', player: 'black' },
+        { id: 'a7', type: 'pawn', position: 'a7', player: 'black' },
+        { id: 'b7', type: 'pawn', position: 'b7', player: 'black' },
+        { id: 'c7', type: 'pawn', position: 'c7', player: 'black' },
+        { id: 'd7', type: 'pawn', position: 'd7', player: 'black' },
+        { id: 'e7', type: 'pawn', position: 'e7', player: 'black' },
+        { id: 'f7', type: 'pawn', position: 'f7', player: 'black' },
+        { id: 'g7', type: 'pawn', position: 'g7', player: 'black' },
+        { id: 'h7', type: 'pawn', position: 'h7', player: 'black' },
+      ];
+
+      const squares = [
+        { id: 'a1', color: 'black' },
+        { id: 'b1', color: 'white' },
+        { id: 'c1', color: 'black' },
+        { id: 'd1', color: 'white' },
+        { id: 'e1', color: 'black' },
+        { id: 'f1', color: 'white' },
+        { id: 'g1', color: 'black' },
+        { id: 'h1', color: 'white' },
+        { id: 'a2', color: 'white' },
+        { id: 'b2', color: 'black' },
+        { id: 'c2', color: 'white' },
+        { id: 'd2', color: 'black' },
+        { id: 'e2', color: 'white' },
+        { id: 'f2', color: 'black' },
+        { id: 'g2', color: 'white' },
+        { id: 'h2', color: 'black' },
+        { id: 'a3', color: 'black' },
+        { id: 'b3', color: 'white' },
+        { id: 'c3', color: 'black' },
+        { id: 'd3', color: 'white' },
+        { id: 'e3', color: 'black' },
+        { id: 'f3', color: 'white' },
+        { id: 'g3', color: 'black' },
+        { id: 'h3', color: 'white' },
+        { id: 'a4', color: 'white' },
+        { id: 'b4', color: 'black' },
+        { id: 'c4', color: 'white' },
+        { id: 'd4', color: 'black' },
+        { id: 'e4', color: 'white' },
+        { id: 'f4', color: 'black' },
+        { id: 'g4', color: 'white' },
+        { id: 'h4', color: 'black' },
+        { id: 'a5', color: 'black' },
+        { id: 'b5', color: 'white' },
+        { id: 'c5', color: 'black' },
+        { id: 'd5', color: 'white' },
+        { id: 'e5', color: 'black' },
+        { id: 'f5', color: 'white' },
+        { id: 'g5', color: 'black' },
+        { id: 'h5', color: 'white' },
+        { id: 'a6', color: 'white' },
+        { id: 'b6', color: 'black' },
+        { id: 'c6', color: 'white' },
+        { id: 'd6', color: 'black' },
+        { id: 'e6', color: 'white' },
+        { id: 'f6', color: 'black' },
+        { id: 'g6', color: 'white' },
+        { id: 'h6', color: 'black' },
+        { id: 'a7', color: 'black' },
+        { id: 'b7', color: 'white' },
+        { id: 'c7', color: 'black' },
+        { id: 'd7', color: 'white' },
+        { id: 'e7', color: 'black' },
+        { id: 'f7', color: 'white' },
+        { id: 'g7', color: 'black' },
+        { id: 'h7', color: 'white' },
+        { id: 'a8', color: 'white' },
+        { id: 'b8', color: 'black' },
+        { id: 'c8', color: 'white' },
+        { id: 'd8', color: 'black' },
+        { id: 'e8', color: 'white' },
+        { id: 'f8', color: 'black' },
+        { id: 'g8', color: 'white' },
+        { id: 'h8', color: 'black' },
+      ];
+
+      function placePieces(pieces) {
+        const chessboard = document.querySelector('.chessboard');
+
+        pieces.forEach(piece => {
+          const square = document.getElementById(piece.position);
+          const colorClass = piece.player + "-piece";
+          square.innerHTML = `<i class="fas fa-chess-${piece.type} large-icon ${colorClass}"></i>`;
+        });
+      }
+
+      function placeSquares(squares) {
+        const chessboard = document.getElementById('chessboard');
+
+        squares.forEach(square => {
+          const squareDiv = document.createElement('div');
+          squareDiv.classList.add('square');
+          squareDiv.id = square.id;
+          if (square.color === 'black') {
+            squareDiv.classList.add('black');
+          }
+          chessboard.appendChild(squareDiv);
+        });
+      }
+
+      function sortSquares(squares, ascending = true) {
+        return squares.sort((a, b) => {
+          if (ascending) {
+            return (a.id.split('').reverse().join('') > b.id.split('').reverse().join('')) ? 1 : -1;
+          } else {
+            return (a.id.split('').reverse().join('') < b.id.split('').reverse().join('')) ? 1 : -1;
+          }
+        });
+      }
+
+      function generateLabels(containerId, type, ascending) {
+        const container = document.getElementById(containerId);
+        const labels = [];
+
+        if (type === 'rows') {
+          labels.push(...[1, 2, 3, 4, 5, 6, 7, 8]);
+        } else if (type === 'columns') {
+          labels.push(...['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']);
+        }
+
+        if (!ascending) {
+          labels.reverse();
+        }
+
+        labels.forEach(label => {
+          const labelDiv = document.createElement('div');
+          labelDiv.classList.add('label');
+          labelDiv.innerHTML = label;
+          container.appendChild(labelDiv);
+        });
+      }
+
+      const blackPlacement = { squaresAscending: true, rowsAscending: true, columnsAscending: false }
+      const whitePlacement = { squaresAscending: false, rowsAscending: false, columnsAscending: true }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const placement = blackPlacement;
+
+        const sortedSquares = sortSquares(squares, placement.squaresAscending);
+        placeSquares(sortedSquares);
+
+        generateLabels('row-labels', 'rows', placement.rowsAscending);
+        generateLabels('column-labels', 'columns', placement.columnsAscending);
+        placePieces(pieces);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container" class="container">
+
+      <div class="vertical-container">
+        <div class="horizontal-container">
+          <div id="row-labels" class="labels left"></div>
+          <div id="chessboard" class="chessboard"></div>
+        </div>
+
+        <div id="column-labels" class="labels bottom"></div>
+      </div>
+
+    </div>
+  </body>
+</html>
