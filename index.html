@@ -80,119 +80,165 @@
         display: flex;
         flex-direction: column;
       }
+
+      .available {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z' fill='blue'/></svg>");
+        background-size: 10px 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .selected {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z' fill='blue'/></svg>");
+        background-size: 10px 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .glow {
+        box-shadow: 0 0 10px #fff;
+      }
     </style>
     <script>
 
       function startingPieces() {
         return [
-          { id: 'a1', type: 'rook', position: 'a1', player: 'white', taken: false },
-          { id: 'b1', type: 'knight', position: 'b1', player: 'white', taken: false  },
-          { id: 'c1', type: 'bishop', position: 'c1', player: 'white', taken: false },
-          { id: 'd1', type: 'queen', position: 'd1', player: 'white', taken: false },
-          { id: 'e1', type: 'king', position: 'e1', player: 'white', taken: false },
-          { id: 'f1', type: 'bishop', position: 'f1', player: 'white', taken: false },
-          { id: 'g1', type: 'knight', position: 'g1', player: 'white', taken: false },
-          { id: 'h1', type: 'rook', position: 'h1', player: 'white', taken: false },
-          { id: 'a2', type: 'pawn', position: 'a2', player: 'white', taken: false },
-          { id: 'b2', type: 'pawn', position: 'b2', player: 'white', taken: false },
-          { id: 'c2', type: 'pawn', position: 'c2', player: 'white', taken: false },
-          { id: 'd2', type: 'pawn', position: 'd2', player: 'white', taken: false },
-          { id: 'e2', type: 'pawn', position: 'e2', player: 'white', taken: false },
-          { id: 'f2', type: 'pawn', position: 'f2', player: 'white', taken: false },
-          { id: 'g2', type: 'pawn', position: 'g2', player: 'white', taken: false },
-          { id: 'h2', type: 'pawn', position: 'h2', player: 'white', taken: false },
-          { id: 'a8', type: 'rook', position: 'a8', player: 'black', taken: false },
-          { id: 'b8', type: 'knight', position: 'b8', player: 'black', taken: false },
-          { id: 'c8', type: 'bishop', position: 'c8', player: 'black', taken: false },
-          { id: 'd8', type: 'queen', position: 'd8', player: 'black', taken: false },
-          { id: 'e8', type: 'king', position: 'e8', player: 'black', taken: false },
-          { id: 'f8', type: 'bishop', position: 'f8', player: 'black', taken: false },
-          { id: 'g8', type: 'knight', position: 'g8', player: 'black', taken: false },
-          { id: 'h8', type: 'rook', position: 'h8', player: 'black', taken: false },
-          { id: 'a7', type: 'pawn', position: 'a7', player: 'black', taken: false },
-          { id: 'b7', type: 'pawn', position: 'b7', player: 'black', taken: false },
-          { id: 'c7', type: 'pawn', position: 'c7', player: 'black', taken: false },
-          { id: 'd7', type: 'pawn', position: 'd7', player: 'black', taken: false },
-          { id: 'e7', type: 'pawn', position: 'e7', player: 'black', taken: false },
-          { id: 'f7', type: 'pawn', position: 'f7', player: 'black', taken: false },
-          { id: 'g7', type: 'pawn', position: 'g7', player: 'black', taken: false },
-          { id: 'h7', type: 'pawn', position: 'h7', player: 'black', taken: false },
+          { id: 'a1', type: 'rook', position: 'a1', player: 'white', taken: false, hasMoved: false },
+          { id: 'b1', type: 'knight', position: 'b1', player: 'white', taken: false, hasMoved: false  },
+          { id: 'c1', type: 'bishop', position: 'c1', player: 'white', taken: false, hasMoved: false },
+          { id: 'd1', type: 'queen', position: 'd1', player: 'white', taken: false, hasMoved: false },
+          { id: 'e1', type: 'king', position: 'e1', player: 'white', taken: false, hasMoved: false },
+          { id: 'f1', type: 'bishop', position: 'f1', player: 'white', taken: false, hasMoved: false },
+          { id: 'g1', type: 'knight', position: 'g1', player: 'white', taken: false, hasMoved: false },
+          { id: 'h1', type: 'rook', position: 'h1', player: 'white', taken: false, hasMoved: false },
+          { id: 'a2', type: 'pawn', position: 'a2', player: 'white', taken: false, hasMoved: false },
+          { id: 'b2', type: 'pawn', position: 'b2', player: 'white', taken: false, hasMoved: false },
+          { id: 'c2', type: 'pawn', position: 'c2', player: 'white', taken: false, hasMoved: false },
+          { id: 'd2', type: 'pawn', position: 'd2', player: 'white', taken: false, hasMoved: false },
+          { id: 'e2', type: 'pawn', position: 'e2', player: 'white', taken: false, hasMoved: false },
+          { id: 'f2', type: 'pawn', position: 'f2', player: 'white', taken: false, hasMoved: false },
+          { id: 'g2', type: 'pawn', position: 'g2', player: 'white', taken: false, hasMoved: false },
+          { id: 'h2', type: 'pawn', position: 'h2', player: 'white', taken: false, hasMoved: false },
+          { id: 'a8', type: 'rook', position: 'a8', player: 'black', taken: false, hasMoved: false },
+          { id: 'b8', type: 'knight', position: 'b8', player: 'black', taken: false, hasMoved: false },
+          { id: 'c8', type: 'bishop', position: 'c8', player: 'black', taken: false, hasMoved: false },
+          { id: 'd8', type: 'queen', position: 'd8', player: 'black', taken: false, hasMoved: false },
+          { id: 'e8', type: 'king', position: 'e8', player: 'black', taken: false, hasMoved: false },
+          { id: 'f8', type: 'bishop', position: 'f8', player: 'black', taken: false, hasMoved: false },
+          { id: 'g8', type: 'knight', position: 'g8', player: 'black', taken: false, hasMoved: false },
+          { id: 'h8', type: 'rook', position: 'h8', player: 'black', taken: false, hasMoved: false },
+          { id: 'a7', type: 'pawn', position: 'a7', player: 'black', taken: false, hasMoved: false },
+          { id: 'b7', type: 'pawn', position: 'b7', player: 'black', taken: false, hasMoved: false },
+          { id: 'c7', type: 'pawn', position: 'c7', player: 'black', taken: false, hasMoved: false },
+          { id: 'd7', type: 'pawn', position: 'd7', player: 'black', taken: false, hasMoved: false },
+          { id: 'e7', type: 'pawn', position: 'e7', player: 'black', taken: false, hasMoved: false },
+          { id: 'f7', type: 'pawn', position: 'f7', player: 'black', taken: false, hasMoved: false },
+          { id: 'g7', type: 'pawn', position: 'g7', player: 'black', taken: false, hasMoved: false },
+          { id: 'h7', type: 'pawn', position: 'h7', player: 'black', taken: false, hasMoved: false },
         ];
       }
 
+      const charToNum = char => char.charCodeAt(0) - 96;
+      const numToChar = num => String.fromCharCode(num + 96);
+      const isBetween1And8 = num => num >=1 && num <=8;
+      function getPosition(row, column) {
+        return numToChar(column) + row;
+      }
+
+      function initialSquares() {
+        const squares  = [
+          { id: 'a1', color: 'black' },
+          { id: 'b1', color: 'white' },
+          { id: 'c1', color: 'black' },
+          { id: 'd1', color: 'white' },
+          { id: 'e1', color: 'black' },
+          { id: 'f1', color: 'white' },
+          { id: 'g1', color: 'black' },
+          { id: 'h1', color: 'white' },
+          { id: 'a2', color: 'white' },
+          { id: 'b2', color: 'black' },
+          { id: 'c2', color: 'white' },
+          { id: 'd2', color: 'black' },
+          { id: 'e2', color: 'white' },
+          { id: 'f2', color: 'black' },
+          { id: 'g2', color: 'white' },
+          { id: 'h2', color: 'black' },
+          { id: 'a3', color: 'black' },
+          { id: 'b3', color: 'white' },
+          { id: 'c3', color: 'black' },
+          { id: 'd3', color: 'white' },
+          { id: 'e3', color: 'black' },
+          { id: 'f3', color: 'white' },
+          { id: 'g3', color: 'black' },
+          { id: 'h3', color: 'white' },
+          { id: 'a4', color: 'white' },
+          { id: 'b4', color: 'black' },
+          { id: 'c4', color: 'white' },
+          { id: 'd4', color: 'black' },
+          { id: 'e4', color: 'white' },
+          { id: 'f4', color: 'black' },
+          { id: 'g4', color: 'white' },
+          { id: 'h4', color: 'black' },
+          { id: 'a5', color: 'black' },
+          { id: 'b5', color: 'white' },
+          { id: 'c5', color: 'black' },
+          { id: 'd5', color: 'white' },
+          { id: 'e5', color: 'black' },
+          { id: 'f5', color: 'white' },
+          { id: 'g5', color: 'black' },
+          { id: 'h5', color: 'white' },
+          { id: 'a6', color: 'white' },
+          { id: 'b6', color: 'black' },
+          { id: 'c6', color: 'white' },
+          { id: 'd6', color: 'black' },
+          { id: 'e6', color: 'white' },
+          { id: 'f6', color: 'black' },
+          { id: 'g6', color: 'white' },
+          { id: 'h6', color: 'black' },
+          { id: 'a7', color: 'black' },
+          { id: 'b7', color: 'white' },
+          { id: 'c7', color: 'black' },
+          { id: 'd7', color: 'white' },
+          { id: 'e7', color: 'black' },
+          { id: 'f7', color: 'white' },
+          { id: 'g7', color: 'black' },
+          { id: 'h7', color: 'white' },
+          { id: 'a8', color: 'white' },
+          { id: 'b8', color: 'black' },
+          { id: 'c8', color: 'white' },
+          { id: 'd8', color: 'black' },
+          { id: 'e8', color: 'white' },
+          { id: 'f8', color: 'black' },
+          { id: 'g8', color: 'white' },
+          { id: 'h8', color: 'black' },
+        ];
+        squares.forEach(square => {
+          square.piece = getPieceByPosition(square.id);
+          if (square.piece) {
+            square.piece.square = square;
+          }
+          square.row = parseInt(square.id.split('')[1]);
+          square.column = charToNum(square.id.split('')[0]);
+        });
+
+        return squares;
+      }
+
       const pieces = startingPieces();
+      const squares = initialSquares();
 
-      const squares = [
-        { id: 'a1', color: 'black' },
-        { id: 'b1', color: 'white' },
-        { id: 'c1', color: 'black' },
-        { id: 'd1', color: 'white' },
-        { id: 'e1', color: 'black' },
-        { id: 'f1', color: 'white' },
-        { id: 'g1', color: 'black' },
-        { id: 'h1', color: 'white' },
-        { id: 'a2', color: 'white' },
-        { id: 'b2', color: 'black' },
-        { id: 'c2', color: 'white' },
-        { id: 'd2', color: 'black' },
-        { id: 'e2', color: 'white' },
-        { id: 'f2', color: 'black' },
-        { id: 'g2', color: 'white' },
-        { id: 'h2', color: 'black' },
-        { id: 'a3', color: 'black' },
-        { id: 'b3', color: 'white' },
-        { id: 'c3', color: 'black' },
-        { id: 'd3', color: 'white' },
-        { id: 'e3', color: 'black' },
-        { id: 'f3', color: 'white' },
-        { id: 'g3', color: 'black' },
-        { id: 'h3', color: 'white' },
-        { id: 'a4', color: 'white' },
-        { id: 'b4', color: 'black' },
-        { id: 'c4', color: 'white' },
-        { id: 'd4', color: 'black' },
-        { id: 'e4', color: 'white' },
-        { id: 'f4', color: 'black' },
-        { id: 'g4', color: 'white' },
-        { id: 'h4', color: 'black' },
-        { id: 'a5', color: 'black' },
-        { id: 'b5', color: 'white' },
-        { id: 'c5', color: 'black' },
-        { id: 'd5', color: 'white' },
-        { id: 'e5', color: 'black' },
-        { id: 'f5', color: 'white' },
-        { id: 'g5', color: 'black' },
-        { id: 'h5', color: 'white' },
-        { id: 'a6', color: 'white' },
-        { id: 'b6', color: 'black' },
-        { id: 'c6', color: 'white' },
-        { id: 'd6', color: 'black' },
-        { id: 'e6', color: 'white' },
-        { id: 'f6', color: 'black' },
-        { id: 'g6', color: 'white' },
-        { id: 'h6', color: 'black' },
-        { id: 'a7', color: 'black' },
-        { id: 'b7', color: 'white' },
-        { id: 'c7', color: 'black' },
-        { id: 'd7', color: 'white' },
-        { id: 'e7', color: 'black' },
-        { id: 'f7', color: 'white' },
-        { id: 'g7', color: 'black' },
-        { id: 'h7', color: 'white' },
-        { id: 'a8', color: 'white' },
-        { id: 'b8', color: 'black' },
-        { id: 'c8', color: 'white' },
-        { id: 'd8', color: 'black' },
-        { id: 'e8', color: 'white' },
-        { id: 'f8', color: 'black' },
-        { id: 'g8', color: 'white' },
-        { id: 'h8', color: 'black' },
-      ];
-
-      function placePieces() {
+      function render() {
         squares.forEach(square => {
           const squareElement = document.getElementById(square.id);
-          const piece = getPieceByPosition(square.id);
+          const piece = square.piece;
+          if (gameState.availableMoves.map(move => move.toSquare).filter(toSquare => toSquare.id === square.id).length !== 0) {
+            console.log("adding move");
+            squareElement.classList.add('available');
+            squareElement.classList.add('glow');
+          } else {
+            squareElement.classList.remove('available');
+            squareElement.classList.remove('glow');
+          }
 
           if (piece) {
             const colorClass = piece.player + "-piece";
@@ -203,7 +249,7 @@
         });
       }
 
-      function placeSquares(squares) {
+      function generateSquares(squares) {
         const chessboard = document.getElementById('chessboard');
 
         squares.forEach(square => {
@@ -234,7 +280,7 @@
         if (type === 'rows') {
           labels.push(...[1, 2, 3, 4, 5, 6, 7, 8]);
         } else if (type === 'columns') {
-          labels.push(...['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']);
+          labels.push(...['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']);
         }
 
         if (!ascending) {
@@ -249,31 +295,23 @@
         });
       }
 
-      function renderChessBoard(placement) {
+      function generateChessBoard(placement) {
         const sortedSquares = sortSquares(squares, placement.squaresAscending);
-        placeSquares(sortedSquares);
+        generateSquares(sortedSquares);
 
         generateLabels('row-labels', 'rows', placement.rowsAscending);
         generateLabels('column-labels', 'columns', placement.columnsAscending);
-        placePieces();
+        render();
       }
 
       const blackPlacement = { squaresAscending: true, rowsAscending: true, columnsAscending: false }
       const whitePlacement = { squaresAscending: false, rowsAscending: false, columnsAscending: true }
 
       const gameState = {
-        moveMode: false,
         selected: null,
-        turn: 'white'
+        turn: 'white',
+        availableMoves: []
       };
-
-      function canReach(from, to, type) {
-        return true;
-      }
-
-      function willExposeKing(from, to) {
-        return false;
-      }
 
       function endTurn() {
         if (gameState.turn === 'white') {
@@ -295,29 +333,199 @@
         return foundPiece;
       }
 
-      function movePiece(from, to) {
-        const fromPiece = getPieceByPosition(from);
-        const toPiece = getPieceByPosition(to);
+      function getSquare(position) {
+        let foundSquare = null;
+        squares.forEach(square => {
+          if (square.id === position)
+            foundSquare = square;
+        });
 
-        if (!fromPiece)
-          throw new Error('No piece in selected square');
-        if (fromPiece.player !== gameState.turn)
-          throw new Error(`It\'s not ${fromPiece.player}\'s turn`);
-        if (!canReach(from, to, fromPiece.type))
-          throw new Error('Piece cannot reach');
-        if (willExposeKing(from, to))
-          throw new Error('Move will expose your King');
+        return foundSquare;
+      }
 
-        fromPiece.position = to;
-        if (toPiece) {
-          toPiece.taken = true;
+      function executeMove(move) {
+        move.fromSquare.piece.hasMoved = true;
+
+        switch (move.type) {
+          case 'move':
+            move.toSquare.piece = move.fromSquare.piece;
+            move.fromSquare.piece = null;
+            break;
+          case 'take':
+            move.toSquare.piece.taken = true;
+            move.toSquare.piece = move.fromSquare.piece;
+            move.fromSquare.piece = null;
+            break;
+          case 'promote':
+            move.toSquare.piece = move.fromSquare.piece;
+            move.toSquare.piece.type = move.promoteToType;
+            move.fromSquare.piece = null;
+            break;
+          case 'castle':
+            move.toSquare.piece = move.fromSquare.piece;
+            move.fromSquare.piece = null;
+            move.rookToSquare.piece = move.rookFromSquare.piece;
+            move.rookFromSquare.piece = null;
+            break;
+          case 'en-passant':
+            move.toSquare.piece = move.fromSquare.piece;
+            move.fromSquare.piece = null;
+            move.takenPawnSquare.piece.taken = true;
+            move.takenPawnSquare.piece = null;
+            break;
+          default:
+            break;
         }
 
         endTurn();
       }
 
+      function oneForward(fromSquare, player) {
+        const newRow = (player === 'white') ? fromSquare.row + 1 : fromSquare.row - 1;
+
+        console.log({newRow: newRow});
+        if(isBetween1And8(newRow)) {
+          return getSquare(getPosition(newRow, fromSquare.column))
+        }
+
+        return null;
+      }
+
+      function getValidMovesFromSquare(square) {
+        let validMoves = [];
+        let visibleSquares = [];
+
+        switch(square.piece.type) {
+          case 'pawn':
+            console.log('is pawn');
+            const oneSquareForward = oneForward(square, square.piece.player);
+
+            if (oneSquareForward && !oneSquareForward.piece) {
+              validMoves.push({ type: 'move', fromSquare: square, toSquare: oneSquareForward });
+
+              const twoSquaresForward = oneForward(oneSquareForward, square.piece.player);
+              if (twoSquaresForward && !twoSquaresForward.piece && !square.piece.hasMoved) {
+                validMoves.push({ type: 'move', fromSquare: square, toSquare: twoSquaresForward });
+              }
+            }
+            break;
+          case 'rook':
+            visibleSquares = getAllVisibleSquaresInDirections(square, ['up', 'down', 'left', 'right'], square.piece.player);
+            visibleSquares.forEach(visibleSquare => {
+              if (visibleSquare.piece) {
+                validMoves.push({type: 'take', fromSquare: square, toSquare: visibleSquare })
+              } else {
+                validMoves.push({type: 'move', fromSquare: square, toSquare: visibleSquare })
+              }
+            });
+            break;
+          case 'bishop':
+            visibleSquares = getAllVisibleSquaresInDirections(square, ['upRight', 'downRight', 'upLeft', 'downRight'], square.piece.player);
+            visibleSquares.forEach(visibleSquare => {
+              if (visibleSquare.piece) {
+                validMoves.push({type: 'take', fromSquare: square, toSquare: visibleSquare })
+              } else {
+                validMoves.push({type: 'move', fromSquare: square, toSquare: visibleSquare })
+              }
+            });
+            break;
+          case 'knight':
+            break;
+          case 'king':
+            break;
+          case 'queen':
+            visibleSquares = getAllVisibleSquaresInDirections(square, Object.keys(directions), square.piece.player);
+            visibleSquares.forEach(visibleSquare => {
+              if (visibleSquare.piece) {
+                validMoves.push({type: 'take', fromSquare: square, toSquare: visibleSquare })
+              } else {
+                validMoves.push({type: 'move', fromSquare: square, toSquare: visibleSquare })
+              }
+            });
+            break;
+          default:
+            break;
+        }
+
+        return validMoves;
+      }
+
+      const directions = {
+        up: {
+          rowInc: 1,
+          colInc: 0,
+        },
+        down: {
+          rowInc: -1,
+          colInc: 0,
+        },
+        left: {
+          rowInc: 0,
+          colInc: -1,
+        },
+        right: {
+          rowInc: 0,
+          colInc: 1,
+        },
+        upRight: {
+          rowInc: 1,
+          colInc: 1,
+        },
+        upLeft: {
+          rowInc: 1,
+          colInc: -1
+        },
+        downRight: {
+          rowInc: -1,
+          colInc: 1,
+        },
+        downLeft: {
+          rowInc: -1,
+          colInc: -1,
+        }
+      };
+      function getNextSquareInDirection(fromSquare, direction) {
+        const vector = directions[direction];
+
+        const newRow = fromSquare.row + vector.rowInc;
+        const newCol = fromSquare.column + vector.colInc;
+
+        if(isBetween1And8(newRow) && isBetween1And8(newCol)) {
+          return getSquare(getPosition(newRow, newCol))
+        }
+
+        return null;
+      }
+
+      function getAllVisibleSquaresInDirections(fromSquare, availableDirections, player) {
+        const visibleSquares = [];
+
+        availableDirections.forEach(direction => {
+          let nextSquare = fromSquare;
+
+          do {
+            nextSquare = getNextSquareInDirection(nextSquare, direction);
+            if (nextSquare && fromSquare !== nextSquare && (!nextSquare.piece || nextSquare.piece.player !== player)) visibleSquares.push(nextSquare);
+          } while (nextSquare && !nextSquare.piece);
+        });
+
+        return visibleSquares;
+      }
+
+      function getAvailableMoveByTargetSquare(targetSquare) {
+        let resultMove = null;
+
+        gameState.availableMoves.forEach(move => {
+          if (move.toSquare === targetSquare) {
+            resultMove = move;
+          }
+        });
+
+        return resultMove;
+      }
+
       document.addEventListener('DOMContentLoaded', () => {
-        renderChessBoard(whitePlacement);
+        generateChessBoard(whitePlacement);
       });
 
       document.addEventListener('click', event => {
@@ -325,28 +533,28 @@
 
         if (target) {
           const id = target.id;
+          const square = getSquare(id);
 
-          if (!gameState.moveMode) {
-            const piece = getPieceByPosition(id);
-            
-            if (piece) {
-              gameState.selected = piece.position;
-              gameState.moveMode = true;
+          if (!gameState.selected) {
+            const piece = square.piece;
+
+            if (piece && piece.player === gameState.turn) {
+              gameState.selected = square;
+              gameState.availableMoves = getValidMovesFromSquare(square);
             }
-          } else if (gameState.moveMode && gameState.selected) {
-            try {
-              movePiece(gameState.selected, id);
-            } catch (e) {
-              alert(e.message);
+          } else if (gameState.selected) {
+            const move = getAvailableMoveByTargetSquare(square);
+            if (move) {
+              executeMove(move);
             }
-            gameState.moveMode = false;
+
             gameState.selected = null;
+            gameState.availableMoves = [];
           }
 
-          placePieces();
+          render();
           console.log({gameState: gameState});
         }
-
       });
     </script>
   </head>
