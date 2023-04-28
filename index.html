@@ -98,6 +98,9 @@
       .glow {
         box-shadow: 0 0 10px #fff;
       }
+      #localVideo {
+        transform: scaleX(-1);
+      }
     </style>
   </head>
   <script>
@@ -596,6 +599,31 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       generateChessBoard(whitePlacement);
+
+
+      const video = document.getElementById('localVideo');
+      const toggleCameraButton = document.getElementById('toggleCameraButton');
+      let stream;
+
+      toggleCameraButton.addEventListener('click', () => {
+        if (stream) {
+          const tracks = stream.getTracks();
+          tracks.forEach(track => track.stop());
+          video.srcObject = null;
+          toggleCameraButton.innerText = 'Turn camera on';
+          stream = null;
+        } else {
+          navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(newStream => {
+              stream = newStream;
+              video.srcObject = stream;
+              toggleCameraButton.innerText = 'Turn camera off';
+            })
+            .catch(error => {
+              console.error('Error accessing media devices.', error);
+            });
+        }
+      });
     });
 
     document.addEventListener('click', event => {
@@ -626,6 +654,8 @@
         console.log({gameState: gameState});
       }
     });
+
+
   </script>
   <body>
     <div id="container" class="container">
@@ -634,6 +664,10 @@
         <div class="horizontal-container">
           <div id="row-labels" class="labels left"></div>
           <div id="chessboard" class="chessboard"></div>
+          <div>
+            <video id="localVideo" autoplay muted></video>
+            <button id="toggleCameraButton">Turn camera off</button>
+          </div>
         </div>
 
         <div id="column-labels" class="labels bottom"></div>
